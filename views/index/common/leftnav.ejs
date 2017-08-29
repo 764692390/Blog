@@ -1,0 +1,54 @@
+<!--侧边导航-->
+<ul class="layui-nav layui-nav-tree layui-nav-side blog-nav-left layui-hide" lay-filter="nav">
+     <% if(routepath == '/'){ %>
+                 <li class="layui-nav-item layui-this">
+                    <a href="/"><i class="fa fa-home fa-fw"></i>&nbsp;网站首页</a>
+                </li>
+            <% }else{ %>
+                 <li class="layui-nav-item">
+                    <a href="/"><i class="fa fa-home fa-fw"></i>&nbsp;网站首页</a>
+                </li>
+            <% } %>
+
+
+            <% if(routepath == '/article'){ %>
+                 <li class="layui-nav-item layui-this">
+                    <a href="/article"><i class="fa fa-file-text fa-fw"></i>&nbsp;文章专栏</a>
+                </li>
+            <% }else{ %>
+                 <li class="layui-nav-item">
+                    <a href="/article"><i class="fa fa-file-text fa-fw"></i>&nbsp;文章专栏</a>
+                 </li>
+            <% } %>
+
+
+            <% if(routepath == '/resource'){ %>
+                <li class="layui-nav-item layui-this">
+                    <a href="/resource"><i class="fa fa-tags fa-fw"></i>&nbsp;资源分享</a>
+                </li>
+            <% }else{ %>
+                <li class="layui-nav-item">
+                    <a href="/resource"><i class="fa fa-tags fa-fw"></i>&nbsp;资源分享</a>
+                </li>
+            <% } %>
+
+            <% if(routepath == '/timeline'){ %>
+                <li class="layui-nav-item layui-this">
+                    <a href="/timeline"><i class="fa fa-hourglass-half fa-fw"></i>&nbsp;点点滴滴</a>
+                </li>
+            <% }else{ %>
+                <li class="layui-nav-item">
+                    <a href="/timeline"><i class="fa fa-hourglass-half fa-fw"></i>&nbsp;点点滴滴</a>
+                </li>
+            <% } %>
+
+            <% if(routepath == '/about'){ %>
+                <li class="layui-nav-item layui-this">
+                    <a href="/about"><i class="fa fa-info fa-fw"></i>&nbsp;关于本站</a>
+                </li>
+            <% }else{ %>
+                <li class="layui-nav-item">
+                    <a href="/about"><i class="fa fa-info fa-fw"></i>&nbsp;关于本站</a>
+                </li>
+            <% } %>
+</ul>

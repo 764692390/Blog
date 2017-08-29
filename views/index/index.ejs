@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; Charset=gb2312">
+    <meta http-equiv="Content-Language" content="zh-CN">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="description" content="小李Blog个人博客，关注Web前端开发技术，移动前端开发，前端资讯，同时分享前端资源和工具等，支持普通用户注册登录会员分享前端技术经验，期待你的参与！">
+    <meta name="keywords" content="小李Blog个人博客,web前端，网页制作，博客，HTML5/CSS3，Javascript，node.js">
+    <title>小李Blog个人博客 | 专注WEB前端开发技术 - 关注用户体验 </title>
+    <link rel="shortcut icon" href="/index/images/Logo_40.png?v=1.0.0" type="image/x-icon">
+    <!--animate-->
+    <link href="/index/css/animate.min.css?v=1.0.0" rel="stylesheet" />
+    <!--Layui-->
+    <link href="/index/plug/layui/css/layui.css?v=1.0.0" rel="stylesheet" />
+    <!--font-awesome-->
+    <link href="/index/plug/font-awesome/css/font-awesome.min.css?v=1.0.0" rel="stylesheet" />
+    <!--全局样式表-->
+    <link href="/index/css/global.css?v=1.0.0" rel="stylesheet" />
+    <!-- 本页样式表 -->
+    <link href="/index/css/home.css?v=1.0.0" rel="stylesheet" />
+    <!--banner-->
+    <link rel="stylesheet" type="text/css" href="/index/banner/engine/style.css" media="screen" />
+</head>
+
+<body>
+    <% include common/nav.ejs %>
+        <!-- 主体（一般只改变这里的内容） -->
+        <div class="blog-body">
+            <!-- canvas -->
+            <canvas id="canvas-banner" style="background: #393D49;"></canvas>
+            <!--为了及时效果需要立即设置canvas宽高，否则就在home.js中设置-->
+            <script type="text/javascript">
+                var canvas = document.getElementById('canvas-banner');
+                canvas.width = window.document.body.clientWidth - 10; //减去滚动条的宽度
+                if (screen.width >= 992) {
+                    canvas.height = window.innerHeight - 65;
+                } else {
+                    canvas.height = window.innerHeight - 65;
+                };
+                var rows = <%= data.rows %>;
+                var pagesize = <%= data.pagesize %>;
+            </script>
+            <!-- 这个一般才是真正的主体内容 -->
+            <div class="blog-container">
+
+                <!--banner Start-->
+                <!--<div id="wowslider-container">
+                    <div class="ws_images">
+                        <ul>
+                            <li>
+                                <img src="http://cdn.layui.com/upload/2017_6/4074000_1496975393225_5351.jpg?v=121232123" alt="123" title="" />
+                            </li>
+                            <li>
+                                <img src="http://cdn.layui.com/upload/2017_6/4074000_1496975460941_4704.jpg?v=121232123" alt="456" title="" />
+                            </li>
+                            <li>
+                                <img src="http://cdn.layui.com/upload/2017_6/4074000_1496975393225_5351.jpg?v=121232123" alt="789" title="" />
+
+                            </li>
+                            <li>
+                                <img src="http://cdn.layui.com/upload/2017_6/4074000_1496975460941_4704.jpg?v=121232123" alt="012" title="" />
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="ws_bullets">
+                        <div>
+                            <a href="#">
+                                <img src="/index/banner/data/tooltips/slide1.png" alt="CSS3 Slider" />
+                            </a>
+
+                            <a href="#">
+                                <img src="/index/banner/data/tooltips/slide2.png" alt="CSS Slideshow" />
+                            </a>
+                            <a href="#">
+                                <img src="/index/banner/data/tooltips/slide3.png" alt="CSS Gallery" />
+                            </a>
+                            <a href="#">
+                                <img src="/index/banner/data/tooltips/slide4.png" alt="Video Support" />
+                            </a>
+                        </div>
+                    </div>
+                </div>-->
+                <!--banner End-->
+
+                <div class="blog-main">
+                    <!-- 网站公告提示 -->
+                    <div class="home-tips shadow">
+                        <i style="float:left;line-height:17px;" class="fa fa-volume-up"></i>
+                        <div class="home-tips-container">
+                            <span style="color: #009688">小李Blog&nbsp;—— &nbsp;个人博客，新版网站采用Layui为前端框架，目前正在建设中！</span>
+                            <span style="color: #009688">偷偷告诉大家，本博客的后台管理也正在制作，为大家准备了游客专用账号！</span>
+                            <span style="color: red">如果你觉得网站做得还不错，来点个赞吧！<a href="http://blog.jczxw.cn" target="_blank" style="color:#01AAED">点我前往</a></span>
+                        </div>
+                    </div>
+                    <!--左边文章列表-->
+                    <div class="blog-main-left">
+                        <div id="HomeConten">
+                            <% for(var i=0; i<data.result.length; i++){ %>
+                                <div class="article shadow animated fadeInLeft">
+                                    <div class="article-left">
+                                        <img src="<%= data.result[i].coverImg %>" alt="<%= data.result[i].title %>" />
+                                    </div>
+                                    <div class="article-right">
+                                        <div class="article-title">
+                                            <% if (data.result[i].stick) { %>
+                                                <i class="icon-stick">顶</i>
+                                                <% } %>
+
+                                                    <% if (data.result[i].recommend) { %>
+                                                        <i class="icon-stick">推荐</i>
+                                                        <% } %>
+
+                                                            <a href="/detail/<%= data.result[i]._id %>">
+                                                                <%= data.result[i].title %>
+                                                            </a>
+                                        </div>
+                                        <div class="article-abstract">
+                                            <%= data.result[i].abstract %>
+                                        </div>
+                                    </div>
+                                    <div class="clear"></div>
+                                    <div class="article-footer">
+                                        <span><i class="fa fa-clock-o"></i>&nbsp;&nbsp; <%= new Date(parseInt(data.result[i].addtime)).format("yyyy-MM-dd HH:mm:ss") %></span>
+                                        <span class="article-author"><i class="fa fa-user"></i>&nbsp;&nbsp;<%= data.result[i].username %></span>
+                                        <span><i class="fa fa-tag"></i>&nbsp;&nbsp;<a href="/article/<%= data.result[i].categoryvalue %>"><%= data.result[i].categoryname %></a></span>
+                                        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;<%= data.result[i].look %></span>
+                                        <span class="article-viewinfo"><i class="fa fa-commenting"></i>&nbsp;<%= data.result[i].msgleng %></span>
+                                    </div>
+                                </div>
+                                <% } %>
+                        </div>
+                        <div id="HomePage"></div>
+                    </div>
+                    <!--右边小栏目-->
+                    <div class="blog-main-right">
+                        <div class="blogerinfo shadow animated fadeInRight">
+
+                            <img src="/index/images/node.png" alt="小李Blog" />
+                            <div>
+                                <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=075489e6280161abb59a0bd97e1b5ec1641dee7a3fcab084e362991ac34155f7"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="小李Blog" title="小李Blog"></a>
+                            </div>
+                            <hr />
+                            <div class="blogerinfo-contact">
+                                <a target="_blank" title="QQ交流" href="http://wpa.qq.com/msgrd?v=3&uin=764692390&site=qq&menu=yes"><i class="fa fa-qq fa-2x"></i></a>
+                                <a target="_blank" title="给我写信" href="javascript:layer.msg('启动邮我窗口')"><i class="fa fa-envelope fa-2x"></i></a>
+                                <a target="_blank" title="新浪微博" href="javascript:layer.msg('转到你的微博主页')"><i class="fa fa-weibo fa-2x"></i></a>
+                                <a target="_blank" title="码云" href="https://github.com/764692390"><i class="fa fa-git fa-2x"></i></a>
+                            </div>
+                        </div>
+                        <div></div>
+                        <!--占位-->
+                        <div class="blog-module shadow animated fadeInRight" id="hotarticles">
+                            <div class="blog-module-title">热文排行</div>
+                            <ul class="fa-ul blog-module-ul">
+                                <!--<li><i class="fa-li fa fa-hand-o-right"></i><a href="detail.html">Web安全之跨站请求伪造CSRF</a></li>-->
+                            </ul>
+                        </div>
+                        <div class="blog-module shadow animated fadeInRight">
+                            <div id="cyReping" role="cylabs" data-use="reping">
+                                <div id="cyWrapper" class="cy-wrapper">
+                                    <div class="hotusers-header"><span>热门评论</span></div>
+                                    <ul class="reping-list">
+                                        <!--<li class="list-item cl">
+                                            <div class="reping-avatar">
+                                                <img width="50px" height="50px" src="//sucimg.itc.cn/avatarimg/774957804_1492673251455_c55" title="基于laypage的layui扩展模块（pagesize.js）！">
+                                            </div>
+                                            <div class="contavatar">
+                                                <span class="reping-nickname">謓d累了</span>
+                                                <span class="reping-content"><img src="//changyan.itc.cn/v2/asset/scs/imgs/new_face/new_face_10.gif" alt="鼓掌" title="鼓掌" ubb="/鼓掌"><img src="//changyan.itc.cn/v2/asset/scs/imgs/new_face/new_face_10.gif" alt="鼓掌" title="鼓掌" ubb="/鼓掌"><img src="//changyan.itc.cn/v2/asset/scs/imgs/new_face/new_face_10.gif" alt="鼓掌" title="鼓掌" ubb="/鼓掌"></span>
+                                                <span class="reping-title"><a href="http://blog.jczxw.cn/detail/58fd51b655177b13c02db988" target="_blank" title="基于laypage的layui扩展模块（pagesize.js）！">评:基于laypage的la</a></span>
+                                            </div>
+                                        </li>-->
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="blog-module shadow animated fadeInRight">
+                            <div id="cyHotusers" role="cylabs" data-use="hotusers">
+                                <div class="hotusers-header"><span>热评用户</span></div>
+                                <ul class="hotusers-list">
+                                    <!--<li class="hotusers-list-item">
+                                        <div class="hotusers-top hotusers-num">1</div>
+                                        <div class="hotusers-avator"><img src="http://photo.pic.sohu.com/images/oldblog/person/11111.gif" width="45" height="45"></div>
+                                        <div>
+                                            <div class="hotusers-nick">搜狐网友54723410</div>
+                                            <span uid="9877809" node-type="privilege-intro" level="2" score="5" class="hotusers-level" title="等级2" style=" background-image: url(https://changyan.itc.cn/v2/asset/scs/imgs/p-lv02.png);">
+                                            <i style=" background-image:url(https://changyan.itc.cn/v2/asset/scs/imgs/p-lv01-04.png);">冒泡</i></span>
+                                            <span class="hotusers-totalcmt">本月评论数：8 </span>
+                                        </div>
+                                        <span class="hotusers-icons"></span>
+                                    </li>-->
+                                </ul>
+                            </div>
+                        </div>
+                        <% if(link.result.length > 0){ %>
+                            <div class="blog-module shadow animated fadeInRight">
+                                <div class="blog-module-title">友情链接</div>
+                                <ul class="blogroll">
+                                    <% for(var i=0; i <link.result.length;i++){ %>
+                                        <li>
+                                            <a target="_blank" href="<%= link.result[i].LinkUrl %>" title="<%= link.result[i].LinkName %>">
+                                                <%= link.result[i].LinkName %>
+                                            </a>
+                                        </li>
+                                        <% } %>
+                                </ul>
+                            </div>
+                       <% } %>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+        <% include common/footer.ejs %>
+            <% include common/leftnav.ejs %>
+                <% include common/share.ejs %>
+                    <!--遮罩-->
+                    <div class="blog-mask animated layui-hide"></div>
+                    <!-- layui.js -->
+                    <script src="/index/js/jquery.min.js?v=1.9.1"></script>
+                    <!-- layui.js -->
+                    <script src="/index/plug/layui/layui.js?v=1.0.0"></script>
+                    <!-- 全局脚本 -->
+                    <script src="/index/js/global.js?v=1.0.0"></script>
+                    <!-- 本页脚本 -->
+                    <script src="/index/js/home.js?v=1.0.0"></script>
+                    <!--banner-->
+                    <!--<script type="text/javascript" src="/index/banner/engine/wowslider.js"></script>
+                    <script type="text/javascript" src="/index/banner/engine/script.js"></script>-->
+</body>
+
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; Charset=gb2312">
+    <meta http-equiv="Content-Language" content="zh-CN">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="description" content="小李Blog个人博客，关注Web前端开发技术，移动前端开发，前端资讯，同时分享前端资源和工具等，支持普通用户注册登录会员分享前端技术经验，期待你的参与！">
+    <meta name="keywords" content="小李Blog个人博客,web前端，网页制作，博客，HTML5/CSS3，Javascript，node.js">
+    <title>小李Blog个人博客 | 专注WEB前端开发技术 - 关注用户体验 </title>
+    <link rel="shortcut icon" href="/index/images/Logo_40.png?v=1.0.0" type="image/x-icon">
+    <!--animate-->
+    <link href="/index/css/animate.min.css?v=1.0.0" rel="stylesheet" />
+    <!--Layui-->
+    <link href="/index/plug/layui/css/layui.css?v=1.0.0" rel="stylesheet" />
+    <!--font-awesome-->
+    <link href="/index/plug/font-awesome/css/font-awesome.min.css?v=1.0.0" rel="stylesheet" />
+    <!--全局样式表-->
+    <link href="/index/css/global.css?v=1.0.0" rel="stylesheet" />
+    <!-- 本页样式表 -->
+    <link href="/index/css/timeline.css?v=1.0.0" rel="stylesheet" />
+</head>
+
+<body>
+    <% include common/nav.ejs %>
+        <!-- 主体（一般只改变这里的内容） -->
+        <div class="blog-body">
+            <!-- canvas -->
+            <canvas id="canvas-banner" style="background: #393D49;"></canvas>
+            <!--为了及时效果需要立即设置canvas宽高，否则就在home.js中设置-->
+            <script type="text/javascript">
+                var canvas = document.getElementById('canvas-banner');
+                canvas.width = window.document.body.clientWidth - 10; //减去滚动条的宽度
+                if (screen.width >= 992) {
+                    canvas.height = window.innerHeight - 65;
+                } else {
+                    canvas.height = window.innerHeight - 65;
+                };
+            </script>
+            <div class="blog-container">
+                <blockquote class="layui-elem-quote sitemap layui-breadcrumb shadow">
+                    <a href="/" title="网站首页">网站首页</a>
+                    <a href="/timeline" title="点点滴滴">点点滴滴</a>
+                    <a><cite>时光轴</cite></a>
+                </blockquote>
+                <div class="blog-main">
+                    <div class="timeline-box shadow">
+                        <div class="timeline-main">
+                            <h1><i class="fa fa-clock-o"></i>时光轴<span> —— 记录生活点点滴滴</span></h1>
+                            <div class="timeline-line"></div>
+                            <div class="timeline-year">
+                                <h2><a class="yearToggle" href="javascript:;">2017年</a><i class="fa fa-caret-down fa-fw"></i></h2>
+                                <div class="timeline-month">
+                                    <h3 class=" animated fadeInLeft"><a class="monthToggle" href="javascript:;">2月</a><i class="fa fa-caret-down fa-fw"></i></h3>
+                                    <ul>
+                                        <li class=" ">
+                                            <div class="h4  animated fadeInLeft">
+                                                <p class="date">02月23日 19:33</p>
+                                            </div>
+                                            <p class="dot-circle animated "><i class="fa fa-dot-circle-o"></i></p>
+                                            <div class="content animated fadeInRight">该时光轴支持手机平板PC，但并不能兼容一些老的浏览器！</div>
+                                            <div class="clear"></div>
+                                        </li>
+                                        <li class=" ">
+                                            <div class="h4  animated fadeInLeft">
+                                                <p class="date">02月11日 20:29</p>
+                                            </div>
+                                            <p class="dot-circle animated "><i class="fa fa-dot-circle-o"></i></p>
+                                            <div class="content animated fadeInRight">这是2017年2月发表的</div>
+                                            <div class="clear"></div>
+                                        </li>
+                                        <li class=" ">
+                                            <div class="h4  animated fadeInLeft">
+                                                <p class="date">02月10日 20:35</p>
+                                            </div>
+                                            <p class="dot-circle animated "><i class="fa fa-dot-circle-o"></i></p>
+                                            <div class="content animated fadeInRight">这是2017年2月发表的</div>
+                                            <div class="clear"></div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h1 style="padding-top:4px;padding-bottom:2px;margin-top:40px;"><i class="fa fa-hourglass-end"></i>THE END</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <% include common/footer.ejs %>
+            <% include common/leftnav.ejs %>
+                <% include common/share.ejs %>
+                    <!--遮罩-->
+                    <div class="blog-mask animated layui-hide"></div>
+                    <!-- layui.js -->
+                    <script src="/index/plug/layui/layui.js?v=1.0.0"></script>
+                    <!-- 自定义全局脚本 -->
+                    <script src="/index/js/global.js?v=1.0.0"></script>
+                    <!-- 本页脚本 -->
+                    <!-- 本页脚本 -->
+                    <script type="text/javascript">
+                        layui.use('jquery', function() {
+                            var $ = layui.jquery;
+
+                            $(function() {
+                                $('.monthToggle').click(function() {
+                                    $(this).parent('h3').siblings('ul').slideToggle('slow');
+                                    $(this).siblings('i').toggleClass('fa-caret-down fa-caret-right');
+                                });
+                                $('.yearToggle').click(function() {
+                                    $(this).parent('h2').siblings('.timeline-month').slideToggle('slow');
+                                    $(this).siblings('i').toggleClass('fa-caret-down fa-caret-right');
+                                });
+                            });
+                        });
+                    </script>
+</body>
+
+</html>

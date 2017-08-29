@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>后台管理系统</title>
+    <link rel="shortcut icon" href="/admin/images/Logo_40.png" type="image/x-icon">
+    <!-- layui.css -->
+    <link href="/admin/plugin/layui/css/layui.css" rel="stylesheet" />
+    <!-- font-awesome.css -->
+    <link href="/admin/plugin/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- animate.css -->
+    <link href="/admin/css/animate.min.css" rel="stylesheet" />
+    <!-- 本页样式 -->
+    <link href="/admin/css/main.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="layui-layout layui-layout-admin">
+        <!--顶部-->
+        <div class="layui-header">
+            <div class="ht-console">
+                <div class="ht-user">
+                    <img src="/admin/images/Logo_40.png" />
+                    <a class="ht-user-name">超级管理员</a>
+                </div>
+            </div>
+            <span class="sys-title">小李Blog后台管理系统</span>
+            <ul class="ht-nav">
+                <li class="ht-nav-item">
+                    <a target="_blank" href="/">前台入口</a>
+                </li>
+                <li class="ht-nav-item">
+                    <a href="javascript:;" id="individuation"><i class="fa fa-tasks fa-fw" style="padding-right:5px;"></i>个性化</a>
+                </li>
+                <li class="ht-nav-item">
+                    <a href="/admin/logout"><i class="fa fa-power-off fa-fw"></i>注销</a>
+                </li>
+            </ul>
+        </div>
+        <!--侧边导航-->
+        <div class="layui-side">
+            <div class="layui-side-scroll">
+                <ul class="layui-nav layui-nav-tree" lay-filter="leftnav">
+                    <li class="layui-nav-item layui-this">
+                        <a href="javascript:;"><i class="fa fa-home"></i>首页</a>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;"><i class="fa fa-file-text"></i>内容管理</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;" data-url="datalist" data-id="1">文章管理</a></dd>
+                            <dd><a href="javascript:;" data-url="category" data-id="2">分类管理</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;"><i class="fa fa-user"></i>用户管理</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;">全部用户</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;"><i class="fa fa-wrench"></i>扩展管理</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;" data-url="link" data-id="3">友情链接</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;"><i class="fa fa-cog"></i>系统配置</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;">SEO配置</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;"><i class="fa fa-info-circle"></i>其他信息</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;">操作日志</a></dd>
+                        </dl>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--收起导航-->
+        <div class="layui-side-hide layui-bg-cyan">
+            <i class="fa fa-long-arrow-left fa-fw"></i>收起导航
+        </div>
+        <!--主体内容-->
+        <div class="layui-body">
+            <div style="margin:0;position:absolute;top:4px;bottom:0px;width:100%;" class="layui-tab layui-tab-brief" lay-filter="tab" lay-allowclose="true">
+                <ul class="layui-tab-title">
+                    <li lay-id="0" class="layui-this">首页</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <p id="LoginLog" style="padding: 10px 15px; margin-bottom: 20px; margin-top: 10px; border:1px solid #ddd;display:inline-block;">
+
+                        </p>
+                        <fieldset class="layui-elem-field layui-field-title">
+                            <legend>统计信息</legend>
+                            <div class="layui-field-box">
+                                <div style="display: inline-block; width: 100%;">
+                                    <div class="ht-box layui-bg-blue">
+                                        <p class="User">0</p>
+                                        <p>管理员总数</p>
+                                    </div>
+                                    <div class="ht-box layui-bg-red">
+                                        <p class="Userqq">0</p>
+                                        <p>第三方登录总数</p>
+                                    </div>
+                                    <div class="ht-box layui-bg-green">
+                                        <p class="MsgList">0</p>
+                                        <p>评论总数</p>
+                                    </div>
+                                    <div class="ht-box layui-bg-orange">
+                                        <p class="Article">0</p>
+                                        <p>文章总数</p>
+                                    </div>
+                                    <div class="ht-box layui-bg-cyan">
+                                        <p class="Category">0</p>
+                                        <p>分类总数</p>
+                                    </div>
+                                    <div class="ht-box layui-bg-black">
+                                        <p class="Link">0</p>
+                                        <p>友连总数</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--底部信息-->
+        <div class="layui-footer">
+            <p style="line-height:44px;text-align:center;">小李Blog后台管理系统 - Design By LZ</p>
+        </div>
+        <!--快捷菜单-->
+        <div class="short-menu" style="display:none">
+            <fieldset class="layui-elem-field layui-field-title">
+                <legend style="color:#fff;padding-top:10px;padding-bottom:10px;">快捷菜单</legend>
+                <div class="layui-field-box">
+                    <div style="width:832px;margin:0 auto;">
+                        <div class="windows-tile windows-two">
+                            <i class="fa fa-file-text"></i>
+                            <span data-url="datalist" data-id="1">文章管理</span>
+                        </div>
+                        <div class="windows-tile windows-one">
+                            <i class="fa fa-volume-up"></i>
+                            <span data-url="datalist" data-id="2">网站公告</span>
+                        </div>
+                        <div class="windows-tile windows-one">
+                            <i class="fa fa-comments-o"></i>
+                            <span data-url="datalist" data-id="3">留言管理</span>
+                        </div>
+                        <div class="windows-tile windows-two">
+                            <i class="fa fa-handshake-o"></i>
+                            <span data-url="datalist" data-id="3">友情链接</span>
+                        </div>
+                        <div class="windows-tile windows-one">
+                            <i class="fa fa-arrow-circle-right"></i>
+                            <span data-url="datalist" data-id="5">更新日志</span>
+                        </div>
+                        <div class="windows-tile windows-one">
+                            <i class="fa fa-wrench"></i>
+                            <span data-url="datalist" data-id="6">操作日志</span>
+                        </div>
+                        <div class="windows-tile windows-one">
+                            <i class="fa fa-tags"></i>
+                            <span data-url="datalist" data-id="7">资源管理</span>
+                        </div>
+                        <div class="windows-tile windows-one">
+                            <i class="fa fa-pencil-square-o"></i>
+                            <span data-url="datalist" data-id="8">笔记管理</span>
+                        </div>
+                        <div class="windows-tile windows-two">
+                            <i class="fa fa-hourglass-half"></i>
+                            <span data-url="datalist" data-id="9">时光轴管理</span>
+                        </div>
+                        <div style="clear:both;"></div>
+                    </div>
+                </div>
+            </fieldset>
+
+        </div>
+        <!--个性化设置-->
+        <div class="individuation animated flipOutY layui-hide">
+            <ul>
+                <li><i class="fa fa-cog" style="padding-right:5px"></i>个性化</li>
+            </ul>
+            <div class="explain">
+                <small>从这里进行系统设置和主题预览</small>
+            </div>
+            <div class="setting-title">设置</div>
+            <div class="setting-item layui-form">
+                <span>侧边导航</span>
+                <input type="checkbox" lay-skin="switch" lay-filter="sidenav" lay-text="ON|OFF" checked>
+            </div>
+            <div class="setting-item layui-form">
+                <span>管家提醒</span>
+                <input type="checkbox" lay-skin="switch" lay-filter="steward" lay-text="ON|OFF" checked>
+            </div>
+            <div class="setting-title">主题</div>
+            <div class="setting-item skin skin-default" data-skin="skin-default">
+                <span>低调优雅</span>
+            </div>
+            <div class="setting-item skin skin-deepblue" data-skin="skin-deepblue">
+                <span>蓝色梦幻</span>
+            </div>
+            <div class="setting-item skin skin-pink" data-skin="skin-pink">
+                <span>姹紫嫣红</span>
+            </div>
+            <div class="setting-item skin skin-green" data-skin="skin-green">
+                <span>一碧千里</span>
+            </div>
+        </div>
+    </div>
+    <!-- layui.js -->
+    <script src="/admin/plugin/layui/layui.js"></script>
+    <!-- layui规范化用法 -->
+    <script type="text/javascript">
+        layui.config({
+            base: '/admin/js/'
+        }).use('main');
+    </script>
+</body>
+
+</html>

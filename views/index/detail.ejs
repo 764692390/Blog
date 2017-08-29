@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; Charset=gb2312">
+    <meta http-equiv="Content-Language" content="zh-CN">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="description" content="<%= data.title %>,小李Blog个人博客，关注Web前端开发技术，移动前端开发，前端资讯，同时分享前端资源和工具等，支持普通用户注册登录会员分享前端技术经验，期待你的参与！">
+    <meta name="keywords" content="<%= data.title %>,小李Blog个人博客,web前端，网页制作，博客，HTML5/CSS3，Javascript，node.js">
+    <title><%= data.title %>| 小李Blog个人博客 | 专注WEB前端开发技术 - 关注用户体验 </title>
+    <link rel="shortcut icon" href="/index/images/Logo_40.png?v=1.0.0" type="image/x-icon">
+    <!--animate-->
+    <link href="/index/css/animate.min.css?v=1.0.0" rel="stylesheet" />
+    <!--Layui-->
+    <link href="/index/plug/layui/css/layui.css?v=1.0.0" rel="stylesheet" />
+    <!--font-awesome-->
+    <link href="/index/plug/font-awesome/css/font-awesome.min.css?v=1.0.0" rel="stylesheet" />
+    <!--全局样式表-->
+    <link href="/index/css/global.css?v=1.0.0" rel="stylesheet" />
+    <!-- 比较好用的代码着色插件 -->
+    <link href="/index/css/prettify.css?v=1.0.0" rel="stylesheet" />
+    <!-- 本页样式表 -->
+    <link href="/index/css/detail.css?v=1.0.0" rel="stylesheet" />
+</head>
+
+<body>
+    <% include common/nav.ejs %>
+        <!-- 主体（一般只改变这里的内容） -->
+        <div class="blog-body">
+        <!-- canvas -->
+            <canvas id="canvas-banner" style="background: #393D49;"></canvas>
+            <!--为了及时效果需要立即设置canvas宽高，否则就在home.js中设置-->
+            <script type="text/javascript">
+                var canvas = document.getElementById('canvas-banner');
+                canvas.width = window.document.body.clientWidth - 10; //减去滚动条的宽度
+                if (screen.width >= 992) {
+                    canvas.height = window.innerHeight- 65;
+                } else {
+                    canvas.height = window.innerHeight - 65;
+                };
+            </script>
+            <div class="blog-container">
+                <blockquote class="layui-elem-quote sitemap layui-breadcrumb shadow">
+                    <a href="/" title="网站首页">网站首页</a>
+                    <a href="/article" title="文章专栏">文章专栏</a>
+                    <a><cite><%= data.title %></cite></a>
+                </blockquote>
+                <div class="blog-main">
+                    <div class="blog-main-left">
+                        <!-- 文章内容（使用Kingeditor富文本编辑器发表的） -->
+                        <div class="article-detail shadow animated fadeInLeft">
+                            <div class="article-detail-title">
+                               <%= data.title %>
+                            </div>
+                            <div class="article-detail-info">
+                                <span>编辑时间：<%=  new Date(parseInt(data.addtime)).format("yyyy-MM-dd HH:mm:ss") %></span>
+                                <span>作者：<%= data.username %></span>
+                                <span>浏览量：<%= data.look %></span>
+                            </div>
+                            <div class="article-detail-content">
+                                <%- data.content %>
+                            </div>
+                        </div>
+                        <!-- 评论区域 -->
+                        <div class="blog-module shadow animated fadeInLeft" style="box-shadow: 0 1px 8px #a6a6a6;">
+                            <div id="SOHUCS" sid="<%= data._id %>"  data-title="<%= data.title %>"></div>
+                            <fieldset class="layui-elem-field layui-field-title" style="margin-bottom:0">
+                                <legend>来说两句吧</legend>
+                                <div class="layui-field-box">
+                                    <form class="layui-form blog-editor" action="/api/sendmsg" method="post">
+                                        <div class="layui-form-item">
+                                            <textarea id="L_content" name="ReplyConten" required="" lay-verify="required" placeholder="我要回答" class="layui-textarea fly-editor" style="height: 150px;"></textarea>
+                                        </div>
+                                        <div class="layui-form-item">
+                                            <input type="hidden" name="ReplyTitle" value="<%= data.title %>">
+                                            <input type="hidden" name="Replyid" value="<%= data._id %>">
+                                            <button class="layui-btn" lay-filter="*" lay-submit="">提交评论</button>
+                                        </div>
+                                   </form>
+
+
+                                    <!--<form class="layui-form blog-editor" action="">
+                                        <div class="layui-form-item">
+                                            <textarea name="editorContent" lay-verify="content" id="remarkEditor" placeholder="请输入内容" class="layui-textarea layui-hide"></textarea>
+                                        </div>
+                                        <div class="layui-form-item">
+                                            <button class="layui-btn" lay-submit="formRemark" lay-filter="formRemark">提交评论</button>
+                                        </div>
+                                    </form>-->
+                                </div>
+                            </fieldset>
+                            <div class="blog-module-title">最新评论</div>
+                            <ul class="blog-comment">
+                                <% for(var i = 0; i < MsgList.result.length; i++){ %>
+                                    <li>
+                                        <div class="comment-parent">
+                                            <img src="<%= MsgList.result[i].UserImg %>" alt="<%= MsgList.result[i].UserName %>" />
+                                            <div class="info">
+                                                <span class="username"><%= MsgList.result[i].UserName %></span>
+                                                <span class="time"><%= new Date(parseInt(MsgList.result[i].AddTimer)).format("yyyy-MM-dd HH:mm:ss") %></span>
+                                                <span class="time"><%= MsgList.result[i].ip.city %>--<%= MsgList.result[i].ip.isp %></span>
+                                            </div>
+                                            <div class="content">
+                                                <%- MsgList.result[i].ReplyConten %>
+                                            </div>
+                                        </div>
+                                    </li>
+                                <% } %>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="blog-main-right">
+                        <!--右边悬浮 平板或手机设备显示-->
+                        <div class="category-toggle"><i class="fa fa-chevron-left"></i></div>
+                        <!--这个div位置不能改，否则需要添加一个div来代替它或者修改样式表-->
+                        <div class="article-category shadow animated fadeInRight">
+                             <div class="article-category shadow cl" id="categorylist">
+                                <div class="article-category-title">分类导航</div>
+                                <% for(var i = 0; i < Category.result.length ; i++){ %>
+                                    <a href="/article/<%= Category.result[i].value %>" > <%= Category.result[i].name %></a>
+                                <% } %>
+                            </div>
+                        </div>
+                        <div class="blog-module shadow animated fadeInRight">
+                            <div id="cyReping" role="cylabs" data-use="reping">
+                                <div id="cyWrapper" class="cy-wrapper">
+                                    <div class="hotusers-header" ><span>热门评论</span></div>
+                                    <ul class="reping-list">
+                                        <!--<li class="list-item cl">
+                                            <div class="reping-avatar">
+                                                <img width="50px" height="50px" src="//sucimg.itc.cn/avatarimg/774957804_1492673251455_c55" title="基于laypage的layui扩展模块（pagesize.js）！">
+                                            </div>
+                                            <div class="contavatar">
+                                                <span class="reping-nickname">謓d累了</span>
+                                                <span class="reping-content"><img src="//changyan.itc.cn/v2/asset/scs/imgs/new_face/new_face_10.gif" alt="鼓掌" title="鼓掌" ubb="/鼓掌"><img src="//changyan.itc.cn/v2/asset/scs/imgs/new_face/new_face_10.gif" alt="鼓掌" title="鼓掌" ubb="/鼓掌"><img src="//changyan.itc.cn/v2/asset/scs/imgs/new_face/new_face_10.gif" alt="鼓掌" title="鼓掌" ubb="/鼓掌"></span>
+                                                <span class="reping-title"><a href="http://blog.jczxw.cn/detail/58fd51b655177b13c02db988" target="_blank" title="基于laypage的layui扩展模块（pagesize.js）！">评:基于laypage的la</a></span>
+                                            </div>
+                                        </li>-->
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="blog-module shadow animated fadeInRight">
+                           <div id="cyHotusers" role="cylabs" data-use="hotusers">
+                                <div class="hotusers-header" ><span>热评用户</span></div>
+                                <ul class="hotusers-list">
+                                    <!--<li class="hotusers-list-item">
+                                        <div class="hotusers-top hotusers-num">1</div>
+                                        <div class="hotusers-avator"><img src="http://photo.pic.sohu.com/images/oldblog/person/11111.gif" width="45" height="45"></div>
+                                        <div>
+                                            <div class="hotusers-nick">搜狐网友54723410</div>
+                                            <span uid="9877809" node-type="privilege-intro" level="2" score="5" class="hotusers-level" title="等级2" style=" background-image: url(https://changyan.itc.cn/v2/asset/scs/imgs/p-lv02.png);">
+                                            <i style=" background-image:url(https://changyan.itc.cn/v2/asset/scs/imgs/p-lv01-04.png);">冒泡</i></span>
+                                            <span class="hotusers-totalcmt">本月评论数：8 </span>
+                                        </div>
+                                        <span class="hotusers-icons"></span>
+                                    </li>-->
+                                </ul>
+                           </div>
+                         </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+
+        <% include common/footer.ejs %>
+            <% include common/leftnav.ejs %>
+                <% include common/share.ejs %>
+                    <!--遮罩-->
+                    <div class="blog-mask animated layui-hide"></div>
+                    <!-- layui.js -->
+                    <script src="/index/plug/layui/layui.js?v=1.0.0"></script>
+                    <!-- 自定义全局脚本 -->
+                    <script src="/index/js/global.js?v=1.0.0"></script>
+                    <!-- 比较好用的代码着色插件 -->
+                    <script src="/index/js/prettify.js?v=1.0.0"></script>
+                    <script src="/index/js/editor.js?v=1.0.0"></script>
+                    <!-- 本页脚本 -->
+                    <script src="/index/js/detail.js?v=1.0.0"></script>
+</body>
+
+</html>

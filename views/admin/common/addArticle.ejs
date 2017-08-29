@@ -1,0 +1,59 @@
+﻿<form class="layui-form form-main" action="">
+    <div class="layui-form-item">
+        <label class="layui-form-label">标题</label>
+        <div class="layui-input-block">
+            <input type="text" name="title"  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">摘要</label>
+        <div class="layui-input-block">
+            <input type="text" name="abstract" lay-verify="required" placeholder="请输入摘要" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">分类</label>
+        <div class="layui-input-block" id="categoryname">
+            <select name="categoryvalue" id="categoryvalue" lay-verify="required">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">文本域</label>
+        <div class="layui-input-block">
+            <!--编辑器-->
+            <textarea id="editor_id" name="content" style="width: 100%; height: 360px" placeholder="请输入内容" lay-verify="required" class="layui-textarea"></textarea>
+
+            <script src="/admin/plugin/kindeditor/kindeditor-min.js"></script>
+            <script src="/admin/plugin/kindeditor/lang/zh_CN.js"></script>
+            <script src="/admin/plugin/kindeditor/plugins/code/code.js"></script>
+            <script src="/admin/js/loadkedit.js"></script>
+        </div>
+    </div>
+    <div class="layui-form-item" style="position:relative;">
+        <label class="layui-form-label">封面</label>
+        <div class="layui-input-inline">
+            <input id="articleCoverSrc" name="coverImg" type="hidden" />
+            <img id="articleCoverImg" class="img-cover" src="/admin/images/cover_default.jpg" alt="封面" />
+        </div>
+        <div class="layui-input-inline" style="position:absolute;bottom:0;">
+            <input id="articleCoverInput" type="file" name="cover" class="layui-upload-file" lay-title="点击上传" lay-ext="jpg|png|bmp" lay-title="请上传一张图片吧亲" />
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">选项</label>
+        <div class="layui-input-block">
+            <input type="checkbox" name="stick" title="置顶">
+            <input type="checkbox" name="recommend" title="推荐">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" id="BtnFromAddUp" lay-submit lay-filter="formAddArticle">立即提交</button>
+            <button id="articleBack" type="button" class="layui-btn layui-btn-primary">返回列表</button>
+        </div>
+    </div>
+</form>
+
+<script src="/admin/js/article-add.js"></script>

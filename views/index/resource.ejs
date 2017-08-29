@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; Charset=gb2312">
+    <meta http-equiv="Content-Language" content="zh-CN">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="description" content="小李Blog个人博客，关注Web前端开发技术，移动前端开发，前端资讯，同时分享前端资源和工具等，支持普通用户注册登录会员分享前端技术经验，期待你的参与！">
+    <meta name="keywords" content="小李Blog个人博客,web前端，网页制作，博客，HTML5/CSS3，Javascript，node.js">
+    <title>小李Blog个人博客 | 专注WEB前端开发技术 - 关注用户体验 </title>
+    <link rel="shortcut icon" href="/index/images/Logo_40.png?v=1.0.0" type="image/x-icon">
+    <!--animate-->
+    <link href="/index/css/animate.min.css?v=1.0.0" rel="stylesheet" />
+    <!--Layui-->
+    <link href="/index/plug/layui/css/layui.css?v=1.0.0" rel="stylesheet" />
+    <!--font-awesome-->
+    <link href="/index/plug/font-awesome/css/font-awesome.min.css?v=1.0.0" rel="stylesheet" />
+    <!--全局样式表-->
+    <link href="/index/css/global.css?v=1.0.0" rel="stylesheet" />
+    <!-- 本页样式表 -->
+    <link href="/index/css/resource.css?v=1.0.0" rel="stylesheet" />
+</head>
+
+<body>
+    <% include common/nav.ejs %>
+        <!-- 主体（一般只改变这里的内容） -->
+        <div class="blog-body">
+            <!-- canvas -->
+            <canvas id="canvas-banner" style="background: #393D49;"></canvas>
+            <!--为了及时效果需要立即设置canvas宽高，否则就在home.js中设置-->
+            <script type="text/javascript">
+                var canvas = document.getElementById('canvas-banner');
+                canvas.width = window.document.body.clientWidth - 10; //减去滚动条的宽度
+                if (screen.width >= 992) {
+                    canvas.height = window.innerHeight - 65;
+                } else {
+                    canvas.height = window.innerHeight - 65;
+                };
+            </script>
+            <div class="blog-container">
+                <blockquote class="layui-elem-quote sitemap layui-breadcrumb shadow">
+                    <a href="/" title="网站首页">网站首页</a>
+                    <a><cite>资源分享</cite></a>
+                </blockquote>
+                <div class="blog-main">
+                    <div class="blog-main">
+                        <div class="resource-main">
+                            <div class="resource shadow">
+                                <div class="resource-cover">
+                                    <a href="javascript:layer.msg(&#39;这里填演示地址&#39;)" target="_blank">
+                                        <img src="/index/images/cover/201703051349045432.jpg" alt="时光轴" />
+                                    </a>
+                                </div>
+                                <h1 class="resource-title"><a href="javascript:layer.msg(&#39;这里填演示地址&#39;)" target="_blank">时光轴</a></h1>
+                                <p class="resource-abstract">本博客使用的时光轴的源码，手工打造！</p>
+                                <div class="resource-info">
+                                    <span class="category"><a href="javascript:layer.msg(&#39;这里跳转到相应分类&#39;)"><i class="fa fa-tags fa-fw"></i>&nbsp;源码</a></span>
+                                    <span class="author"><i class="fa fa-user fa-fw"></i>小李Blog</span>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="resource-footer">
+                                    <a class="layui-btn layui-btn-small layui-btn-primary" href="javascript:layer.msg(&#39;这里填演示地址&#39;)" target="_blank"><i class="fa fa-eye fa-fw"></i>演示</a>
+                                    <a class="layui-btn layui-btn-small layui-btn-primary" href="javascript:layer.msg(&#39;这里填下载地址&#39;)" target="_blank"><i class="fa fa-download fa-fw"></i>下载</a>
+                                </div>
+                            </div>
+
+                            <!-- 清除浮动 -->
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <% include common/footer.ejs %>
+            <% include common/leftnav.ejs %>
+                <% include common/share.ejs %>
+                    <!--遮罩-->
+                    <div class="blog-mask animated layui-hide"></div>
+                    <!-- layui.js -->
+                    <script src="/index/plug/layui/layui.js?v=1.0.0"></script>
+                    <!-- 自定义全局脚本 -->
+                    <script src="/index/js/global.js?v=1.0.0"></script>
+                    <!-- 本页脚本 -->
+</body>
+
+</html>
